@@ -38,13 +38,37 @@
     "colId": "history",
     "containerId": "",
     "name": "localhost:3000/products/o/?id=1",
-    "url": "localhost:3000/products/1",
-    "method": "GET",
+    "url": "localhost:3000/products",
+    "method": "POST",
     "sortNum": 0,
     "created": "2022-08-22T04:10:44.829Z",
-    "modified": "2022-08-22T16:16:37.847Z",
+    "modified": "2022-08-22T18:16:48.921Z",
     "headers": [],
     "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"name\": \"pokemon\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "611b5350-4a42-47b0-acde-f410742699f4",
+    "colId": "history",
+    "containerId": "",
+    "name": "localhost:3000/product",
+    "url": "localhost:3000/product",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2022-08-22T18:16:44.417Z",
+    "modified": "2022-08-22T18:16:44.468Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"name\": \"pokemon\"\n}",
+      "form": []
+    },
     "tests": []
   }
 ]

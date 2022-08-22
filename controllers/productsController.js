@@ -19,7 +19,6 @@ const getAll = async (_req, res) => {
 const findById = async (req, res) => {
   try {
     const { id } = req.params;
-    console.log(id);
     const result = await productService.findById(+id);
     if (result.length > 0) {
       return res
@@ -31,10 +30,27 @@ const findById = async (req, res) => {
       .json({ message: 'Product not found' });
   } catch (error) {
     console.log(error.message, error.code, 'findById Product');
+    return res
+      .status(500)
+      .json({ message: 'deu ruin' });
+  }
+};
+
+const create = async (req, res) => {
+  const { name } = req.body;
+  try {
+    const result = await productService.create(name);
+    res.status(201).json(result);
+  } catch (error) {
+    console.log(console.erro(error.message), 'create controller');
+    return res
+      .status(500)
+      .json({ message: 'deu ruim' });
   }
 };
 
 module.exports = {
   getAll,
   findById,
+  create,
 };
