@@ -7,11 +7,11 @@ const create = (req, res, next) => {
     .validate({ name });
   if (error) {
     if (error.message.includes('required')) {
-      return res
-        .status(Number(400)).json({ message: '\"name\" is required' });
+      return res.status(400).json({ message: '"name" is required' });
     }
     return res
-      .status(Number(422)).json({ message: '"name" length must be at least 5 characters long' });
+      .status(422)
+      .json({ message: '"name" length must be at least 5 characters long' });
   }
   next();
 };
