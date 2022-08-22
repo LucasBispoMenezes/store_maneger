@@ -9,6 +9,7 @@ const { PORT } = process.env;
 
 app.use(bp.json());
 app.use('/products', productRote);
+// app.use('/sales');
 
 app.listen(process.env.PORT, () => {
   console.log(`Escutando na porta ${PORT}`);
