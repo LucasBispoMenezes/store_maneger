@@ -1,7 +1,7 @@
 const connection = require('./connection');
 
 const getAll = async () => {
-  const QUERY = 'SELECT * FROM products';
+  const QUERY = 'SELECT * FROM StoreManager.products';
   try {
     const [products] = await connection.execute(QUERY);
     return products;
@@ -10,7 +10,7 @@ const getAll = async () => {
   }
 };
 const findById = async (id) => {
-  const QUERY = 'SELECT * FROM products WHERE id = ?';
+  const QUERY = 'SELECT * FROM StoreManager.products WHERE id = ?';
   try {
     const [products] = await connection.execute(QUERY, [id]);
     return products;
@@ -19,7 +19,7 @@ const findById = async (id) => {
   }
 };
 const create = async (name) => {
-  const QUERY = 'INSERT INTO products(name) VALUES(?)';
+  const QUERY = 'INSERT INTO StoreManager.products(name) VALUES(?)';
   const [result] = await connection.execute(QUERY, [name]);
   return result;
 };
