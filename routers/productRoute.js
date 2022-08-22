@@ -1,9 +1,9 @@
 const productRote = require('express').Router();
 const productController = require('../controllers/productsController');
-const { validateCreator } = require('../middlewares/validate');
+const validate = require('../middlewares/validate');
 
 productRote.get('/', productController.getAll);
 productRote.get('/:id', productController.findById);
-productRote.post('/', validateCreator, productController.create);
+productRote.post('/', validate.create, productController.create);
 
 module.exports = productRote;
