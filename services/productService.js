@@ -28,7 +28,6 @@ const create = async (name) => {
     };
   }
 };
-create('arroz');
 
 module.exports = {
   getAll,

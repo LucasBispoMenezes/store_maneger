@@ -1,5 +1,5 @@
 const SaleRote = require('express').Router();
 
-SaleRote.get('/');
+// SaleRote.get('/');
 
 module.exports = SaleRote;
