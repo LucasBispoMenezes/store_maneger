@@ -46,7 +46,14 @@ describe('testando rota /Product da camada service', () => {
       const result = await productService.getAll()
       expect(result).to.be.a('array')
     })
-    it('espero que o array tenha mais de um iten', () => { })
+    it('o array possua itens do tipo objeto', async function () {
+      const result = await productService.getAll(1);
+      expect(result[0]).to.be.an('object');
+    })
+    it('objetos tenham as propriedades: "id",e "age"', async function () {
+      const result = await productService.getAll(1);
+      expect(result[0]).to.all.keys('id', 'name');
+    });
   })
 })
 describe('testando rota /Product/:id da camada service', () => {
@@ -98,9 +105,13 @@ describe('testando rota /Product/:id da camada service', () => {
       expect(result[0]).to.be.a('object')
     })
     it('o array possua itens do tipo objeto', async function () {
-      const result = await productService.getAll();
+      const result = await productService.findById(1);
       expect(result[0]).to.be.an('object');
     })
+    it('objetos tenham as propriedades: "id" e "age"', async function () {
+      const result = await productService.findById(1);
+      expect(result[0]).to.all.keys('id', 'name');
+    });
   })
 
 })
