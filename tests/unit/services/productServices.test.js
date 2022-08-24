@@ -23,7 +23,6 @@ describe('testando rota /Product da camada service', () => {
   })
   it('o array não esteja vazio', async function () {
     const result = await productService.getAll();
-    console.log(result);
     expect(result).to.not.empty;
   });
   describe('testando caso de sucesso', () => {

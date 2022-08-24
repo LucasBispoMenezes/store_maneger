@@ -5,6 +5,14 @@ const createSale = async () => {
   return result.insertId;
 };
 
+const createProductSale = async (obj) => {
+  const result = await saleModel.createProductSale(obj);
+  if (result.affectedRows) {
+    return true;
+  }
+};
+
 module.exports = {
   createSale,
+  createProductSale,
 };

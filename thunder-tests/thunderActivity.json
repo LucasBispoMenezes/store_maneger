@@ -61,12 +61,12 @@
     "method": "POST",
     "sortNum": 0,
     "created": "2022-08-22T18:16:44.417Z",
-    "modified": "2022-08-24T04:00:02.587Z",
+    "modified": "2022-08-24T06:18:23.835Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"name\": \"pokemon\"\n}",
+      "raw": "  [\n    {\n      \"productId\": 1,\n      \"quantity\":1\n    },\n    {\n      \"productId\": 2,\n      \"quantity\":5\n    },\n     {\n      \"productId\": 3,\n      \"quantity\":6\n    }\n  ]",
       "form": []
     },
     "tests": []
