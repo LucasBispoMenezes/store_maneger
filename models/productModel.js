@@ -3,13 +3,11 @@ const connection = require('./connection');
 const getAll = async () => {
   const QUERY = 'SELECT * FROM StoreManager.products';
   const [products] = await connection.execute(QUERY);
-  console.log(products);
   return products;
 };
 const findById = async (id) => {
   const QUERY = 'SELECT * FROM StoreManager.products WHERE id = ?';
   const [products] = await connection.execute(QUERY, [id]);
-  console.log(products);
   return products;
 };
 const create = async (name) => {
