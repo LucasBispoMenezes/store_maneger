@@ -8,5 +8,4 @@ const connection = mysql.createPool({
   password: process.env.MYSQL_PASSWORD,
   database: process.env.MYSQL_DATABASE || 'StoreManager',
 });
-
 module.exports = connection;
