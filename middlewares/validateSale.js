@@ -1,7 +1,7 @@
-const validateSend = (req, res, next) => {
+/* const validateSend = (req, res, next) => {
   response = {}
   request = {}
 
 };
 
-module.exports = validateSend;
+module.exports = validateSend; */
