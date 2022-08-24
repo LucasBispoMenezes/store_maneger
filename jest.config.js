@@ -4,5 +4,5 @@ module.exports = {
   "testMatch": [
     "**/__tests__/*.test.js"
   ],
-  "testTimeout": 1500000
+  "testTimeout": 15000
 }

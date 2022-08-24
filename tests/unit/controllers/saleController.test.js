@@ -1,4 +1,4 @@
-const { expect } = require('chai');
+/* const { expect } = require('chai');
 const sinon = require('sinon');
 const saleService = require('../../../services/saleServices');
 const saleController = require('../../../controllers/saleController');
@@ -38,10 +38,5 @@ describe('testando a camada controller do sale', () => {
       const result = await saleController.createSale(req, res)
       expect(res.status.calledWith(201)).to.be.true
     })
-/*     it('deve retornar um objetoCom ', async () => { 
-      const result = await saleController.createSale(req, res)
-      expect(res.json.calledWith({"id": 2})).to.be.true
-    })
-    it('deve retornar um array', async () => { }) */
   })
-})
+}) */
