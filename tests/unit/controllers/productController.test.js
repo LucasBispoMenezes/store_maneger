@@ -114,7 +114,7 @@ describe('testando a rota /product', () => {
 
       it('deve retornar o status 200', async () => {
         await productControllers.findById(req, res)
-        expect(res.json.calledWith(response)).to.be.true
+        expect(res.json.calledWith(response[0])).to.be.true
         expect(res.status.calledWith(200)).to.be.true
       })
     })

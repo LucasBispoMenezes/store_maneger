@@ -7,10 +7,10 @@ const productService = require('../../../services/productService');
 describe('testando rota /Product da camada service', () => {
   describe('testando caso de não encontre no banco de dados', () => {
     before(() => {
-      sinon.stub(productModel, 'getAll').resolves(false)
+      sinon.stub(productService, 'getAll').resolves(false)
     })
     after(() => {
-      productModel.getAll.restore()
+      productService.getAll.restore()
     })
     it('espero que seja booleano', async () => {
       const result = await productService.getAll()
@@ -47,11 +47,11 @@ describe('testando rota /Product da camada service', () => {
       expect(result).to.be.a('array')
     })
     it('o array possua itens do tipo objeto', async function () {
-      const result = await productService.getAll(1);
+      const result = await productService.findById(1);
       expect(result[0]).to.be.an('object');
     })
-    it('objetos tenham as propriedades: "id",e "age"', async function () {
-      const result = await productService.getAll(1);
+    it('objetos tenham as propriedades: "id", "name" e "age"', async function () {
+      const result = await productService.findById(1);
       expect(result[0]).to.all.keys('id', 'name');
     });
   })
@@ -108,7 +108,7 @@ describe('testando rota /Product/:id da camada service', () => {
       const result = await productService.findById(1);
       expect(result[0]).to.be.an('object');
     })
-    it('objetos tenham as propriedades: "id" e "age"', async function () {
+    it('objetos tenham as propriedades: "id", "name" e "age"', async function () {
       const result = await productService.findById(1);
       expect(result[0]).to.all.keys('id', 'name');
     });
