@@ -2,21 +2,15 @@ const connection = require('./connection');
 
 const getAll = async () => {
   const QUERY = 'SELECT * FROM StoreManager.products';
-  try {
-    const [products] = await connection.execute(QUERY);
-    return products;
-  } catch (error) {
-    console.log(error.message, error.code, 'getAll Product');
-  }
+  const [products] = await connection.execute(QUERY);
+  console.log(products);
+  return products;
 };
 const findById = async (id) => {
   const QUERY = 'SELECT * FROM StoreManager.products WHERE id = ?';
-  try {
-    const [products] = await connection.execute(QUERY, [id]);
-    return products;
-  } catch (error) {
-    console.log(error.message, error.code, 'findById model');
-  }
+  const [products] = await connection.execute(QUERY, [id]);
+  console.log(products);
+  return products;
 };
 const create = async (name) => {
   const QUERY = 'INSERT INTO StoreManager.products(name) VALUES(?)';

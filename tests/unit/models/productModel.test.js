@@ -5,10 +5,10 @@ const productModel = require('../../../models/productModel');
 
 
 describe('testando a rota "/product"', () => {
-  describe('testando caso de falha ', () => {
+  describe('caso não tenha nada no banco de dados', () => {
     before(() => {
       const model = [[]]
-      sinon.stub(connection, 'execute').throws()
+      sinon.stub(connection, 'execute').returns(model)
         })
     after(() => {
       connection.execute.restore()

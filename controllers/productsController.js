@@ -23,7 +23,7 @@ const findById = async (req, res) => {
     if (result.length > 0) {
       return res
         .status(200)
-        .json(result[0]);
+        .json(result);
     }
     return res
       .status(404)
@@ -42,7 +42,7 @@ const create = async (req, res) => {
     const result = await productService.create(name);
     res.status(201).json(result);
   } catch (error) {
-    console.log(console.erro(error.message), 'create controller');
+    console.log(error.message, 'create controller');
     return res
       .status(500)
       .json({ message: 'deu ruim' });
