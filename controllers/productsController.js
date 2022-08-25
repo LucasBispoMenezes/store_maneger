@@ -2,20 +2,19 @@ const productService = require('../services/productService');
 
 const getAll = async (_req, res) => {
   const result = await productService.getAll();
-  if (result.length > 0) {
+  if (!result) {
     return res
-      .status(200)
-      .json(result);
+      .status(404)
+      .json({ message: 'Product not found' });
   }
   return res
-    .status(404)
-    .json({ message: 'Product not found' });
+    .status(200)
+    .json(result);
 };
 
 const findById = async (req, res) => {
   const { id } = req.params;
   const result = await productService.findById(+id);
-  console.log(result);
   if (!result) {
     return res
       .status(404)
@@ -38,10 +37,8 @@ const deleteId = async (req, res) => {
 const create = async (req, res) => {
   const { name } = req.body;
   const result = await productService.create(name);
-  res.status(201).json(result);
-  return res
-    .status(500)
-    .json({ message: 'deu ruim' });
+  console.log(result);
+  return res.status(201).json(result);
 };
 
 module.exports = {

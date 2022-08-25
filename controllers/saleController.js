@@ -5,7 +5,6 @@ function retorno(arr, id) {
     productId, quantity,
   }) => saleServices.createProductSale({ id, productId, quantity }));
 }
-console.log(retorno);
 
 const createSale = async (req, res) => {
   const sales = req.body;
@@ -16,13 +15,13 @@ const createSale = async (req, res) => {
   };
   const ret = Promise.all(retorno(sales, idSale));
   const total = (await ret).every((bool) => bool === true);
-  console.log(total);
   if (total) {
     return res.status(201).json(result);
-  }
+  } 
 };
 module.exports = {
   createSale,
+  retorno,
 };
 
 /* try {
