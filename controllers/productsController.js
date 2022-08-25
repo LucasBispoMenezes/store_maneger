@@ -47,7 +47,6 @@ const deleteId = async (req, res) => {
 const create = async (req, res) => {
   const { name } = req.body;
   const result = await productService.create(name);
-  console.log(result);
   return res.status(201).json(result);
 };
 

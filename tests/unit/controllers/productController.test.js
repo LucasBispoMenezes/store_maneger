@@ -12,7 +12,7 @@ describe('testando a rota /product', () => {
       before(() => {
         res.status = sinon.stub().returns(res)
         res.json = sinon.stub().returns();
-        sinon.stub(productService, 'getAll').resolves([])
+        sinon.stub(productService, 'getAll').resolves(false)
       })
       after(() => {
         productService.getAll.restore()

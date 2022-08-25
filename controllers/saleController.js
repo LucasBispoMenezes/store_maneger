@@ -15,12 +15,12 @@ const createSale = async (req, res) => {
   console.log(await ret);
   const total = (await ret).every((bool) => bool === true);
   if (total) {
-    console.log('aqio');
     return res.status(201).json(result);
   }
 };
 const getAll = async (_req, res) => {
   const result = await saleServices.getAll();
+  console.log(result);
   return res.status(200).json(result);
 };
 const findByID = async (req, res) => {

@@ -4,110 +4,144 @@ const connection = require('../../../models/connection');
 const productModel = require('../../../models/productModel');
 
 
-describe('testando a rota "/product"', () => {
-  describe('caso não tenha nada no banco de dados', () => {
+describe('testando a rota product Camada model"', () => {
+  describe('funcão getAll', async () => {
     before(() => {
-      const model = [[]]
-      sinon.stub(connection, 'execute').returns(model)
+      sinon.stub(connection, 'execute').resolves([[
+        { id: 1, name: 'Martelo de Thor' },
+        { id: 2, name: 'Traje de encolhimento' },
+        { id: 3, name: 'Escudo do Capitão América' }
+      ]])
     })
     after(() => {
-      connection.execute.restore()
+      connection.execute.restore();
     })
-    it('deve retornar um array', async () => {
-      const result = await productModel.getAll();
+    it('é um  array', async () => {
+      const result = await productModel.getAll()
       expect(result).to.be.an('array')
     })
-    it('o array deve está vazio"', async () => {
-      const result = await productModel.getAll();
-      expect(result).to.be.empty;
+    it('não está vazio', async () => {
+      const result = await productModel.getAll()
+      expect(result).to.be.not.empty
+    })
+    it('tem a chaves "id, name"', async () => {
+      const result = await productModel.getAll()
+      expect(result[0]).to.be.all.keys('id', 'name')
     })
   })
-  describe('testando caso de sucesso', () => {
-    const model = [
-      [{
-        id: 1,
-        name: 'Martelo de Thor'
-      },
-      {
-        id: 1,
-        name: 'Martelo de Thor'
-      }],
-      []]
+  describe('funcão finById', async () => {
     before(() => {
-      sinon.stub(connection, 'execute').returns(model)
+      sinon.stub(connection, 'execute').resolves([[
+        { id: 1, name: 'Martelo de Thor' },
+      ]])
     })
     after(() => {
-      connection.execute.restore()
+      connection.execute.restore();
     })
-    it('o retorno é um array', async () => {
-      const result = await productModel.getAll();
+    it('é um  array', async () => {
+      const result = await productModel.findById(1)
       expect(result).to.be.an('array')
     })
-    it('o array não pode ser vazio ', async () => {
-      const result = await productModel.getAll();
-      expect(result).not.to.have.empty;
+    it('não está vazio', async () => {
+      const result = await productModel.findById(1)
+      expect(result).to.be.not.empty
     })
-    it('o array deve conter mais de um item ', async () => {
-      const result = await productModel.getAll();
-      expect(result).to.have.lengthOf(2);
-      const item = result[0]
-      expect(item).to.include.all.keys('id', 'name')
+    it('tem a chaves "id, name"', async () => {
+      const result = await productModel.findById(1)
+      expect(result[0]).to.be.all.keys('id', 'name')
     })
-    it('o array possua itens do tipo objeto', async function () {
-      const result = await productModel.getAll();
-      expect(result[0]).to.be.an('object');
-    });
-  })
-})
-describe('testando a rota "/product/id"', () => {
-  describe('caso não encontre no banco de dados ', () => {
-    const model = [[]]
-    before(() => {
-      sinon.stub(connection, 'execute').resolves(model)
-    })
-    after(() => {
-      connection.execute.restore()
-    })
-    it('deve retornar um array', async () => {
-      const result = await productModel.findById(5);
-      expect(result).to.be.an('array')
-    })
-    it('o array deve está vazio"', async () => {
-      const result = await productModel.findById(5);
-      expect(result).to.be.empty;
+    it('tem somente um valor no objeto', async () => {
+      const result = await productModel.findById(1)
+      expect(result).to.be.lengthOf(1)
     })
   })
-  describe('testando caso de sucesso', () => {
-    const model = [
-      [{
-        id: 1,
-        name: 'Martelo de Thor'
-      }],
-      []
-    ]
+  describe('funcão create', async () => {
     before(() => {
-      sinon.stub(connection, 'execute').returns(model)
+      sinon.stub(connection, 'execute').resolves([
+        {
+          fieldCount: 0,
+          affectedRows: 1,
+          insertId: 4,
+          info: '',
+          serverStatus: 2,
+          warningStatus: 0
+        }
+      ])
     })
     after(() => {
-      connection.execute.restore()
+      connection.execute.restore();
     })
-    it('o retorno é um array', async () => {
-      const result = await productModel.findById(1);
-      expect(result).to.be.an('array')
+    it('é um  array', async () => {
+      const result = await productModel.create('lucas')
+      expect(result).to.be.an('object')
     })
-    it('o array não pode ser vazio ', async () => {
-      const result = await productModel.findById(1);
-      expect(result).not.to.have.empty;
+    it('não está vazio', async () => {
+      const result = await productModel.create('lucas')
+      expect(result).to.be.not.empty
     })
-    it('o array nãp pode conter mais de um item ', async () => {
-      const result = await productModel.findById(1);
-      expect(result).to.have.lengthOf(1);
-      expect(result[0]).to.include.all.keys('id', 'name')
-
+    it('tem as chaves "insertId, affectedRows"', async () => {
+      const result = await productModel.create('lucas')
+      expect(result).to.have.includes({ 'insertId': 4, 'affectedRows': 1 })
     })
-    it('o array possua itens do tipo objeto', async function () {
-      const result = await productModel.getAll();
-      expect(result[0]).to.be.an('object');
+  })
+  describe('funcão updataProduct', async () => {
+    before(() => {
+      sinon.stub(connection, 'execute').resolves([
+        {
+          fieldCount: 0,
+          affectedRows: 1,
+          insertId: 0,
+          info: 'Rows matched: 1  Changed: 1  Warnings: 0',
+          serverStatus: 2,
+          warningStatus: 0,
+          changedRows: 1
+        }
+      ])
+    })
+    after(() => {
+      connection.execute.restore();
+    })
+    it('é um  array', async () => {
+      const result = await productModel.updateProduct(1,'lucas')
+      expect(result).to.be.an('object')
+    })
+    it('não está vazio', async () => {
+      const result = await productModel.updateProduct(1,'lucas')
+      expect(result).to.be.not.empty
+    })
+    it('tem as chaves " affectedRows com valor 1"', async () => {
+      const result = await productModel.updateProduct(1, 'lucas')
+      expect(result).to.includes({ 'affectedRows': 1 })
+    })
+  })
+  describe('funcão deleteId', async () => {
+    before(() => {
+      sinon.stub(connection, 'execute').resolves([
+        {
+          fieldCount: 0,
+          affectedRows: 1,
+          insertId: 0,
+          info: '',
+          serverStatus: 2,
+          warningStatus: 0,
+          changedRows: 1
+        }
+      ])
+    })
+    after(() => {
+      connection.execute.restore();
+    })
+    it('é um  array', async () => {
+      const result = await productModel.deleteId(1, 'lucas')
+      expect(result).to.be.an('object')
+    })
+    it('não está vazio', async () => {
+      const result = await productModel.deleteId(1, 'lucas')
+      expect(result).to.be.not.empty
+    })
+    it('tem as chaves "affectedRows" valor 1', async () => {
+      const result = await productModel.deleteId(1)
+      expect(result).to.includes({ 'affectedRows': 1 })
     })
   })
 })

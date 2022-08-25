@@ -6,13 +6,9 @@ const getAll = async () => {
   return false;
 };
 const findById = async (id) => {
-  try {
-    const result = await productModel.findById(id);
-    if (result.length > 0) return result;
-  } catch (error) {
-    console.log(error);
-    return false;
-  }
+  const result = await productModel.findById(id);
+  if (result.length > 0) return result;
+  return false;
 };
 
 const create = async (name) => {
@@ -27,13 +23,14 @@ const create = async (name) => {
 
 const updateProduct = async (id, name) => {
   const result = await productModel.updateProduct(id, name);
-  if (result.affectedRows === 0) {
-    return null;
+  if (result.affectedRows === 1) {
+    const { affectedRows } = result;
+    return affectedRows;
   }
-  return result.affectedRows;
+  return null;
 };
 const deleteId = async (id) => {
-  const result = await productModel.deleteId(id);
+  const result = await productModel.deleteId(+id);
   return result;
 };
 
