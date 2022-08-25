@@ -22,10 +22,18 @@ const getAll = async () => {
   const result = await saleModel.getAll();
   return result;
 };
+const deleteSale = async (id) => {
+  const result = await saleModel.deleteSale(id);
+  if (result.affectedRows === 0) {
+    return null;
+  }
+  return result.affectedRows;
+};
 
 module.exports = {
   createSale,
   createProductSale,
   getAll,
   findByID,
+  deleteSale,
 };

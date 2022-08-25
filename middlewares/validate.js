@@ -1,4 +1,3 @@
-/* eslint-disable no-useless-escape */
 const validateCriator = require('./schemasJoi');
 
 const create = (req, res, next) => {

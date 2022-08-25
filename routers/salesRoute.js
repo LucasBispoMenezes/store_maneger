@@ -5,5 +5,6 @@ const validate = require('../middlewares/validateSale');
 SaleRote.post('/', validate.validateSend, saleController.createSale);
 SaleRote.get('/:id', saleController.findByID);
 SaleRote.get('/', saleController.getAll);
+SaleRote.delete('/:id', saleController.deleteSale);
 
 module.exports = SaleRote;

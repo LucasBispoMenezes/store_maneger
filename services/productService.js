@@ -25,6 +25,13 @@ const create = async (name) => {
   }
 };
 
+const updateProduct = async (id, name) => {
+  const result = await productModel.updateProduct(id, name);
+  if (result.affectedRows === 0) {
+    return null;
+  }
+  return result.affectedRows;
+};
 const deleteId = async (id) => {
   const result = await productModel.deleteId(id);
   return result;
@@ -34,5 +41,6 @@ module.exports = {
   getAll,
   findById,
   create,
+  updateProduct,
   deleteId,
 };
