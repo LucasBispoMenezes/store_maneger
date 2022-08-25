@@ -1,26 +1,22 @@
 const productService = require('../services/productService');
 
 const getAll = async (_req, res) => {
-  try {
-    const result = await productService.getAll();
-    if (result.length > 0) {
-      return res
-        .status(200)
-        .json(result);
-    }
+  const result = await productService.getAll();
+  if (result.length > 0) {
     return res
-      .status(404)
-      .json({ message: 'Product not found' });
-  } catch (error) {
-    console.log(error.message, error.code, 'getAll controller');
+      .status(200)
+      .json(result);
   }
+  return res
+    .status(404)
+    .json({ message: 'Product not found' });
 };
 
 const findById = async (req, res) => {
   const { id } = req.params;
   const result = await productService.findById(+id);
+  console.log(result);
   if (!result) {
-    console.log(result);
     return res
       .status(404)
       .json({ message: 'Product not found' });
@@ -41,15 +37,11 @@ const deleteId = async (req, res) => {
 
 const create = async (req, res) => {
   const { name } = req.body;
-  try {
-    const result = await productService.create(name);
-    res.status(201).json(result);
-  } catch (error) {
-    console.log(error.message, 'create controller');
-    return res
-      .status(500)
-      .json({ message: 'deu ruim' });
-  }
+  const result = await productService.create(name);
+  res.status(201).json(result);
+  return res
+    .status(500)
+    .json({ message: 'deu ruim' });
 };
 
 module.exports = {

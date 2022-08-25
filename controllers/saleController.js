@@ -5,6 +5,7 @@ function retorno(arr, id) {
     productId, quantity,
   }) => saleServices.createProductSale({ id, productId, quantity }));
 }
+console.log(retorno);
 
 const createSale = async (req, res) => {
   const sales = req.body;
