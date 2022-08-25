@@ -1,4 +1,4 @@
-const { expect } = require('chai');
+/* const { expect } = require('chai');
 const sinon = require('sinon');
 const saleService = require('../../../services/saleServices');
 const saleController = require('../../../controllers/saleController');
@@ -22,7 +22,7 @@ describe('testando a camada controller do sale', () => {
        const result = await saleController.createSale(req, res)
        expect(res.json.calledWith({ message: "deu merda" })).to.have.true;
      })
-   }) */
+   }) 
 
   describe("testando caso de sucesso", () => {
     const retornoValalue = {
@@ -54,7 +54,6 @@ describe('testando a camada controller do sale', () => {
       res.status = sinon.stub().returns(res)
       res.json = sinon.stub().returns()
       sinon.stub(saleService, 'createSale').returns(3)
-      sinon.stub(saleController, 'retorno').returns([true, true, true])
     })
     after(() => {
       saleService.createSale.restore()
@@ -64,4 +63,4 @@ describe('testando a camada controller do sale', () => {
       expect(res.status.calledWith(201)).to.be.true
     })
   })
-})
+}) */

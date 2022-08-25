@@ -1,42 +1,39 @@
 const saleServices = require('../services/saleServices');
 
-function retorno(arr, id) {
-  return arr.map(({
-    productId, quantity,
-  }) => saleServices.createProductSale({ id, productId, quantity }));
-}
-
 const createSale = async (req, res) => {
   const sales = req.body;
-  const idSale = await saleServices.createSale();
+  const id = await saleServices.createSale();
+  console.log(sales);
+  const retorno = sales.map(({
+    productId, quantity,
+  }) => saleServices.createProductSale({ id, productId, quantity }));
   const result = {
-    id: idSale,
+    id,
     itemsSold: sales,
   };
-  const ret = Promise.all(retorno(sales, idSale));
+  const ret = Promise.all(retorno);
+  console.log(await ret);
   const total = (await ret).every((bool) => bool === true);
   if (total) {
+    console.log('aqio');
     return res.status(201).json(result);
-  } 
+  }
+};
+const getAll = async (_req, res) => {
+  const result = await saleServices.getAll();
+  return res.status(200).json(result);
+};
+const findByID = async (req, res) => {
+  const { id } = req.params;
+  const result = await saleServices.findByID(+id);
+  console.log(result);
+  if (result === null) {
+    return res.status(404).json({ message: 'Sale not found' });
+  }
+  return res.status(200).json(result);
 };
 module.exports = {
   createSale,
-  retorno,
+  getAll,
+  findByID,
 };
-
-/* try {
-  const sales = req.body;
-  const idSale = await saleServices.createSale();
-  const result = {
-    id: idSale,
-    itemsSold: sales,
-  };
-  const ret = Promise.all(retorno(sales, idSale));
-  const total = (await ret).every((bool) => bool === true)
-  console.log(total);
-  if (total) {
-    return res.status(201).json(result);
-  };
-} catch (error) {
-  console.log(error);
-} */
