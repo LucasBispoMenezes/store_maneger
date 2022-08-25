@@ -17,32 +17,26 @@ const getAll = async (_req, res) => {
 };
 
 const findById = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const result = await productService.findById(+id);
-    if (result.length > 0) {
-      return res
-        .status(200)
-        .json(result[0]);
-    }
+  const { id } = req.params;
+  const result = await productService.findById(+id);
+  if (!result) {
+    console.log(result);
     return res
       .status(404)
       .json({ message: 'Product not found' });
-  } catch (error) {
-    console.log(error.message, error.code, 'findById Product');
-    return res
-      .status(500)
-      .json({ message: 'deu ruin' });
   }
+  return res
+    .status(200)
+    .json(result[0]);
 };
 
 const deleteId = async (req, res) => {
   const { id } = req.params;
-    const result = await productService.deleteId(+id);
-    if (result.affectedRows !== 1) {
-      return res.status(404).json({ message: 'Product not found' });
-    }
-    return res.status(204).end();
+  const result = await productService.deleteId(+id);
+  if (result.affectedRows !== 1) {
+    return res.status(404).json({ message: 'Product not found' });
+  }
+  return res.status(204).end();
 };
 
 const create = async (req, res) => {
