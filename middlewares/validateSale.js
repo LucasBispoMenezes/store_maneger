@@ -1,18 +1,22 @@
 const schema = require('./schemasJoi');
+const productService = require('../services/productService');
 
-const validateSend = (req, res, _next) => {
+const validateSend = async (req, res, next) => {
   const sales = req.body;
-  const result = sales.map((obj) => {
-    const { error } = schema.validateSend.validate(obj);
-    if (!error) {
-      return true;
-    }
-    res.status(400)
-      .json({ message: error.message });
-    return false;
-  });
-  const total = result.reducer((prev, curr) => prev + curr, 0);
-  console.log(total);
+  try {
+    await Promise.all(sales.map(async (sale) => {
+      const validate = schema.validateSend.validate(sale);
+      const { error, value } = validate;
+      if (error) throw error;
+      const idValidate = await productService.findById(sale.productId);
+      if (idValidate === undefined) throw new Error('404|Product not found');
+      return value;
+    }));
+    next();
+  } catch (error) {
+        return res
+          .status(Number(error.message.split('|')[0]))
+          .json({ message: error.message.split('|')[1] });
+      }
 };
-
-module.exports = validateSend;
+module.exports = { validateSend };

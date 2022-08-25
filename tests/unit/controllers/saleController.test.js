@@ -1,11 +1,11 @@
-/* const { expect } = require('chai');
+const { expect } = require('chai');
 const sinon = require('sinon');
 const saleService = require('../../../services/saleServices');
 const saleController = require('../../../controllers/saleController');
 
-
+/*
 describe('testando a camada controller do sale', () => {
-  describe('testando caso de erro', () => {
+  describe('testando caso de erro', () => { 
     const res = {}, req = {};
     before(() => {
       res.status = sinon.stub().returns(res)

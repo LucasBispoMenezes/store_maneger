@@ -1,7 +1,7 @@
 const SaleRote = require('express').Router();
 const saleController = require('../controllers/saleController');
-const validateSend = require('../middlewares/validateSale');
+const validate = require('../middlewares/validateSale');
 // console.log(validateSend);
-SaleRote.post('/', validateSend, saleController.createSale);
+SaleRote.post('/', validate.validateSend, saleController.createSale);
 
 module.exports = SaleRote;

@@ -4,11 +4,6 @@ const app = express();
 const productRote = require('./routers/productRoute');
 const SaleRote = require('./routers/salesRoute');
 
-/* app.use((err, req, res, next) => {
-  console.error(err)
-  res.status(500).send('Something broke!')
-}) */
-
 app.use(express.json());
 app.use('/products', productRote);
 app.use('/sales', SaleRote);

@@ -13,7 +13,11 @@ const findById = async (id) => {
 const create = async (name) => {
   const QUERY = 'INSERT INTO StoreManager.products(name) VALUES(?)';
   const [result] = await connection.execute(QUERY, [name]);
-  console.log(result);
+  return result;
+};
+const deleteId = async (id) => {
+  const QUERY = 'DELETE FROM StoreManager.products WHERE id = ?';
+  const [result] = await connection.execute(QUERY, [id]);
   return result;
 };
 
@@ -21,4 +25,5 @@ module.exports = {
   getAll,
   findById,
   create,
+  deleteId,
 };

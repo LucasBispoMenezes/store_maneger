@@ -7,21 +7,36 @@ function retorno(arr, id) {
 }
 
 const createSale = async (req, res) => {
-  console.log('cheguei');
-  try {
-    const sales = req.body;
-    const idSale = await saleServices.createSale();
-    const result = {
-      id: idSale,
-      itemsSold: sales,
-    };
-    const ret = Promise.all(retorno(sales, idSale));
-    if (await ret) return res.status(201).json(result);
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ message: 'deu merda' });
+  const sales = req.body;
+  const idSale = await saleServices.createSale();
+  const result = {
+    id: idSale,
+    itemsSold: sales,
+  };
+  const ret = Promise.all(retorno(sales, idSale));
+  const total = (await ret).every((bool) => bool === true);
+  console.log(total);
+  if (total) {
+    return res.status(201).json(result);
   }
 };
 module.exports = {
   createSale,
 };
+
+/* try {
+  const sales = req.body;
+  const idSale = await saleServices.createSale();
+  const result = {
+    id: idSale,
+    itemsSold: sales,
+  };
+  const ret = Promise.all(retorno(sales, idSale));
+  const total = (await ret).every((bool) => bool === true)
+  console.log(total);
+  if (total) {
+    return res.status(201).json(result);
+  };
+} catch (error) {
+  console.log(error);
+} */

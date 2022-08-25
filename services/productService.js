@@ -6,9 +6,13 @@ const getAll = async () => {
   return false;
 };
 const findById = async (id) => {
-  const result = await productModel.findById(id);
-  if (result.length > 0) return result;
-  return false;
+  try {
+    const result = await productModel.findById(id);
+    if (result.length > 0) return result;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
 };
 
 const create = async (name) => {
@@ -21,8 +25,14 @@ const create = async (name) => {
   }
 };
 
+const deleteId = async (id) => {
+  const result = await productModel.deleteId(id);
+  return result;
+};
+
 module.exports = {
   getAll,
   findById,
   create,
+  deleteId,
 };
