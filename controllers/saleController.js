@@ -1,19 +1,23 @@
 const saleServices = require('../services/saleServices');
 
-const createSale = async (req, res) => {
-  const sales = req.body;
-  const id = await saleServices.createSale();
-  console.log(sales);
-  const retorno = sales.map(({
+function retorno(arr, id) {
+  return arr.map(({
     productId, quantity,
   }) => saleServices.createProductSale({ id, productId, quantity }));
+}
+
+const createSale = async (req, res) => {
+  const sales = req.body;
+  const idSale = await saleServices.createSale();
   const result = {
-    id,
+    id: idSale,
     itemsSold: sales,
   };
-  const ret = Promise.all(retorno);
+  console.log(await Promise.all(retorno(sales, idSale)));
+  const ret = Promise.all(retorno(sales, idSale));
   console.log(await ret);
   const total = (await ret).every((bool) => bool === true);
+  console.log(await total);
   if (total) {
     return res.status(201).json(result);
   }

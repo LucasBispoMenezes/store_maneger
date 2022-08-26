@@ -9,7 +9,8 @@ const validateSend = async (req, res, next) => {
       const { error, value } = validate;
       if (error) throw error;
       const idValidate = await productService.findById(sale.productId);
-      if (idValidate === undefined) throw new Error('404|Product not found');
+      console.log(idValidate, 'midleware');
+      if (idValidate === false) throw new Error('404|Product not found');
       return value;
     }));
     next();
