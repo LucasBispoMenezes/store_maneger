@@ -55,7 +55,7 @@ Use o comando `docker exec -it store_manager bash`.
 
 # EndPoints da API
 
-###pegar todos os produtos
+### pegar todos os produtos
 `Metodo get`
 - O endpoint para listar produtos é acessível através do caminho `/products` e `/products/:id`
 
@@ -63,7 +63,7 @@ Use o comando `docker exec -it store_manager bash`.
 
 - Através do caminho `products/:id` apenas o produto com o id presente na URL será retornado;
 
-###criar produtos no db
+### criar produtos no db
 `Metodo post`
 - O endpoint para criar um  produtos é  através do caminho `products`
 -  deve ser enviado atraves do body um objeto com a chave `name`
@@ -94,7 +94,7 @@ Use o comando `docker exec -it store_manager bash`.
 ```
   - Se a venda for criada com sucesso o resultado retornado deverá ser conforme exibido abaixo, com um status http 201:
 
-###listar Todas as vendas
+### listar Todas as vendas
 `Metodo get`
 - O endpoint para listar vendas é acessível através do caminho `/sales` e `/sales/:id`;
 -  Através do caminho` /sales`, todas as vendas são retornadas;
