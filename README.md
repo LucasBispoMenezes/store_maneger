@@ -13,6 +13,8 @@ nesse projeto utilizei
 - Express
 - Arquitetura MSC
 - Mysql
+- Sequelize
+- mocha, chai, sinon
 
 ## Como rodar com docker 
 
@@ -54,13 +56,73 @@ Use o comando `docker exec -it store_manager bash`.
 
 # EndPoints da API
 
-### products Metodo Get
-- O endpoint para listar produtos é acessível através do caminho (/products) e (/products/:id);
+###pegar todos os produtos
+`Metodo get`
+- O endpoint para listar produtos é acessível através do caminho `/products` e `/products/:id`
 
-- Através do caminho /products, todos os produtos são retornados;
+- Através do caminho `products` todos os produtos são retornados;
 
-- Através do caminho /products/:id, apenas o produto com o id presente na URL será retornado;
+- Através do caminho `products/:id` apenas o produto com o id presente na URL será retornado;
 
-### products Metodo Post
+###criar produtos no db
+`Metodo post`
+- O endpoint para criar um  produtos é  através do caminho `products`
+-  deve ser enviado atraves do body um objeto com a chave `name`
+
+```javascript
+  {
+    "name": "ProdutoX"
+  }
+```
+- Se o produto for criado com sucesso o resultado retornado deverá ser conforme exibido abaixo, com um status http 201:
+
+### criar uma venda no db
+`Metodo post`
+- O endpoint é  acessível através do caminho `/sales`
+- O corpo da requisição deverá seguir o formato abaixo:
+```javascript
+  [
+    {
+      "productId": 1,
+      "quantity":1
+    },
+    {
+      "productId": 2,
+      "quantity":5
+    }
+	...
+  ]
+```
+  - Se a venda for criada com sucesso o resultado retornado deverá ser conforme exibido abaixo, com um status http 201:
+
+###listar Todas as vendas
+`Metodo get`
+- O endpoint para listar vendas é acessível através do caminho `/sales` e `/sales/:id`;
+-  Através do caminho` /sales`, todas as vendas são retornadas;
+- Através do caminho `/sales/:id`, apenas a venda com o id presente na URL deve ser retornada;
+
+### atualizar um produto
+`Metodo put`
+- O endpoint deve será através do caminho `/products/:id`;
+- Apenas o produto com o id presente na URL será atualizado;
+- O corpo da requisição deverá seguir o formato abaixo:
+```
+  {
+    "name": "Martelo do Batman"
+  }
+```
+
+### deletar um produto
+`Metodo delete`
+- O endpoint deve será através do caminho `/products/:id`;
+- Apenas o produto com o id presente na URL será deletado;
+
+`http://localhost/product/1`
+
+###deletar uma venda
+- O endpoint deve ser acessível através do caminho `/sales/:id`;
+- Apenas a venda com o id presente na URL será deletado;
+
+`http://localhost/sales/1`
 
 
