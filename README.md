@@ -13,7 +13,6 @@ nesse projeto utilizei
 - Express
 - Arquitetura MSC
 - Mysql
-- Sequelize
 - mocha, chai, sinon
 
 ## Como rodar com docker 
